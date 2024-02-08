@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ハンバーガー</title>
+<title>HAMBURGER TOWER</title>
 <style>
+  body {
+    background-image: url("image/title.webp");
+    background-position: top;
+    background-repeat:no-repeat;
+  }
   .drag-image {
     position: absolute;
     width: 709px;
@@ -54,6 +59,8 @@
   </a>
   <!-- 画像表示 -->
   <div class="right">
+    <img class="drag-image upPan" src="image/drag_upPan.webp" alt="上バンズ">
+    <img class="drag-image upPan" src="image/drag_upPan.webp" alt="上バンズ">
     <img class="drag-image upPan" src="image/drag_upPan.webp" alt="上バンズ">
   </div>
   <div class="left">
@@ -187,7 +194,7 @@
       if(setBurgerPosition.x-setBurger.width/2 > beforeBurgerPosition.x ||
          setBurgerPosition.x+setBurger.width/2+setBurger.width < beforeBurgerPosition.x || 
          setBurgerPosition.y+setBurger.height/2+setBurger.height/3 < beforeBurgerPosition.y ||
-         setBurgerPosition.y-setBurger.height > beforeBurgerPosition.y) {
+         setBurgerPosition.y-setBurger.height/2 > beforeBurgerPosition.y) {
           // ずれている場合
           alert('ミス……　乗せた具の枚数：'+cnt+'枚');
           // 全てのドラッグを削除。
