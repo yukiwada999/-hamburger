@@ -13,15 +13,23 @@
     border-radius: 5px;
     cursor: pointer;
   }
+  .right {
+  position: absolute;
+  left: 700px;
+  }
 </style>
 </head>
 <body>
 
-  <img class="drag-image upPan" src="image/drag_upPan.webp" alt="上バンズ">
-  <img class="drag-image" src="image/drag_cabbage.webp" alt="キャベツ">
-  <img class="drag-image" src="image/drag_meat.webp" alt="肉">
-  <img class="drag-image" src="image/drag_tomato.webp" alt="トマト">
-  <img class="drag-image" src="image/drag_downPan.webp" alt="下バンズ">
+  <div class="right">
+    <img class="drag-image upPan" src="image/drag_upPan.webp" alt="上バンズ">
+  </div>
+  <div class="left">
+    <img class="drag-image" src="image/drag_cabbage.webp" alt="キャベツ">
+    <img class="drag-image" src="image/drag_meat.webp" alt="肉">
+    <img class="drag-image" src="image/drag_tomato.webp" alt="トマト">
+    <img class="drag-image" src="image/drag_downPan.webp" alt="下バンズ">
+  </div>
 
 <script>
   // 開始座標を格納する変数
