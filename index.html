@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Draggable Image</title>
 <style>
-  #drag-image {
+  .drag-image {
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: 709px;
+    height: 138px;
     border: 2px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
@@ -17,7 +17,11 @@
 </head>
 <body>
 
-<img id="drag-image" src="image/image.jpg" alt="Draggable Image">
+<img class="drag-image" src="image/drag_cabbage.webp" alt="キャベツ">
+<img class="drag-image" src="image/drag_tomato.webp" alt="トマト">
+<img class="drag-image" src="image/drag_meat.webp" alt="肉">
+<img class="drag-image" src="image/drag_upPan.webp" alt="上バンズ">
+<img class="drag-image" src="image/drag_downPan.webp" alt="下バンズ">
 
 <script>
   // 開始座標を格納する変数
@@ -58,18 +62,19 @@
 
   // ドラッグされた画像の位置を取得する関数
 function getDraggedImagePosition() {
-  const draggedImage = document.getElementById('drag-image');
   const position = {
-    x: draggedImage.offsetLeft,
-    y: draggedImage.offsetTop
+    x: draggedElement.offsetLeft,
+    y: draggedElement.offsetTop
   };
   return position;
 }
 
 
   // 画像要素にドラッグ関連のイベントリスナーを追加
-  const dragImage = document.getElementById('drag-image');
-  dragImage.addEventListener('mousedown', startDragging);
+  const dragImages = document.querySelectorAll('.drag-image');
+  dragImages.forEach(function(image) {
+    image.addEventListener('mousedown', startDragging);
+  });
   document.addEventListener('mousemove', drag);
   document.addEventListener('mouseup', stopDragging);
 </script>
