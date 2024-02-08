@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draggable Image</title>
+<style>
+  #drag-image {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<img id="drag-image" src="image/image.jpg" alt="Draggable Image">
+
+<script>
+  // 開始座標を格納する変数
+  let startX = 0;
+  let startY = 0;
+
+  // ドラッグ中の画像要素を格納する変数
+  let draggedElement = null;
+
+  // ドラッグ開始時の処理
+  function startDragging(event) {
+    // ドラッグ中の画像要素を設定
+    draggedElement = event.target;
+    // ドラッグ開始時のマウス座標を記録
+    startX = event.clientX - draggedElement.offsetLeft;
+    startY = event.clientY - draggedElement.offsetTop;
+  }
+
+  // ドラッグ中の処理
+  function drag(event) {
+    // ドラッグ中のマウス座標を取得し、画像要素の位置を更新
+    event.preventDefault();
+    if (draggedElement) { 
+      // draggedElementがnullでない場合のみ処理を行う
+      draggedElement.style.left = (event.clientX - startX) + 'px';
+      draggedElement.style.top = (event.clientY - startY) + 'px';
+    }
+  }
+
+  // ドラッグ終了時の処理
+  function stopDragging() {
+    // ドラッグ中の画像要素をリセット
+      
+    // 例として、画像の位置をコンソールに出力する
+    console.log(getDraggedImagePosition());
+    draggedElement = null;
+  }
+
+  // ドラッグされた画像の位置を取得する関数
+function getDraggedImagePosition() {
+  const draggedImage = document.getElementById('drag-image');
+  const position = {
+    x: draggedImage.offsetLeft,
+    y: draggedImage.offsetTop
+  };
+  return position;
+}
+
+
+  // 画像要素にドラッグ関連のイベントリスナーを追加
+  const dragImage = document.getElementById('drag-image');
+  dragImage.addEventListener('mousedown', startDragging);
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('mouseup', stopDragging);
+</script>
+
+</body>
+</html>
