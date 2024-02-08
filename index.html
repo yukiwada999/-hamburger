@@ -17,11 +17,11 @@
 </head>
 <body>
 
-<img class="drag-image" src="image/drag_cabbage.webp" alt="キャベツ">
-<img class="drag-image" src="image/drag_tomato.webp" alt="トマト">
-<img class="drag-image" src="image/drag_meat.webp" alt="肉">
-<img class="drag-image" src="image/drag_upPan.webp" alt="上バンズ">
-<img class="drag-image" src="image/drag_downPan.webp" alt="下バンズ">
+  <img class="drag-image upPan" src="image/drag_upPan.webp" alt="上バンズ">
+  <img class="drag-image" src="image/drag_cabbage.webp" alt="キャベツ">
+  <img class="drag-image" src="image/drag_meat.webp" alt="肉">
+  <img class="drag-image" src="image/drag_tomato.webp" alt="トマト">
+  <img class="drag-image" src="image/drag_downPan.webp" alt="下バンズ">
 
 <script>
   // 開始座標を格納する変数
@@ -53,19 +53,68 @@
 
   // ドラッグ終了時の処理
   function stopDragging() {
-    // 画像の位置をコンソールに出力する
-    console.log(getDraggedImagePosition());
+    // ハンバーガーをセットする。
+    setHamburger(draggedElement);
+    storeDraggedElement = draggedElement;
     // ドラッグ中の画像要素をリセット
     draggedElement = null;
+    endDrag(storeDraggedElement)
   }
 
-  // ドラッグされた画像の位置を取得する関数
-  function getDraggedImagePosition() {
+  // ドラッグ終了後の処理
+  function endDrag(element)
+  {
+    element.removeEventListener('mousedown', startDragging);
+  }
+
+  // 画像の位置を取得する関数
+  function getImagePosition(image) {
     const position = {
-      x: draggedElement.offsetLeft,
-      y: draggedElement.offsetTop
+      x: image.offsetLeft,
+      y: image.offsetTop
     };
     return position;
+  }
+
+  let beforeBurger=null;  // 直前に設置したハンバーガー
+  let cnt = 1;  // 何段ハンバーガーを積んだか。
+
+  // ハンバーガーをセットする。
+  function setHamburger(setBurger)
+  {
+    if(beforeBurger!=null) {
+      // 直前に積んだバーガーが存在する場合。
+      setBurgerPosition = getImagePosition(setBurger);
+      beforeBurgerPosition = getImagePosition(beforeBurger);
+      // バーガーの位置が半分よりずれているか判定。
+      if(setBurgerPosition.x-setBurger.width/2 > beforeBurgerPosition.x ||
+         setBurgerPosition.x+setBurger.width/2+setBurger.width < beforeBurgerPosition.x || 
+         setBurgerPosition.y+setBurger.height/2+setBurger.height/3 < beforeBurgerPosition.y ||
+         setBurgerPosition.y-setBurger.height > beforeBurgerPosition.y) {
+          // ずれている場合
+          alert('ミス……　乗せた具の枚数：'+cnt+'枚');
+          // 全てのドラッグを削除。
+          const dragImages = document.querySelectorAll('.drag-image');
+          dragImages.forEach(function(image) {
+            image.removeEventListener('mousedown', startDragging);
+          });
+
+      } else {
+        // ずれていない場合
+        cnt++;
+        // 上バンズを乗せていた場合。
+        if(setBurger.classList.contains('upPan')) {
+          alert('クリア！！　乗せた具の枚数：'+cnt+'枚');
+          // 全てのドラッグを削除。
+          const dragImages = document.querySelectorAll('.drag-image');
+          dragImages.forEach(function(image) {
+            image.removeEventListener('mousedown', startDragging);
+          });
+        }
+      }
+    }
+    
+    beforeBurger = setBurger;
   }
 
   // 画像要素にドラッグ関連のイベントリスナーを追加
