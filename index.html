@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Draggable Image</title>
+<title>ハンバーガー</title>
 <style>
   .drag-image {
     position: absolute;
@@ -53,22 +53,20 @@
 
   // ドラッグ終了時の処理
   function stopDragging() {
-    // ドラッグ中の画像要素をリセット
-      
-    // 例として、画像の位置をコンソールに出力する
+    // 画像の位置をコンソールに出力する
     console.log(getDraggedImagePosition());
+    // ドラッグ中の画像要素をリセット
     draggedElement = null;
   }
 
   // ドラッグされた画像の位置を取得する関数
-function getDraggedImagePosition() {
-  const position = {
-    x: draggedElement.offsetLeft,
-    y: draggedElement.offsetTop
-  };
-  return position;
-}
-
+  function getDraggedImagePosition() {
+    const position = {
+      x: draggedElement.offsetLeft,
+      y: draggedElement.offsetTop
+    };
+    return position;
+  }
 
   // 画像要素にドラッグ関連のイベントリスナーを追加
   const dragImages = document.querySelectorAll('.drag-image');
