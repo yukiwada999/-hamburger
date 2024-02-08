@@ -193,8 +193,9 @@
       beforeBurgerPosition = getImagePosition(beforeBurger);
       // バーガーの位置が半分よりずれているか判定。
       if(setBurgerPosition.x-setBurger.width/2 > beforeBurgerPosition.x ||
-         setBurgerPosition.x+setBurger.width/2+setBurger.width < beforeBurgerPosition.x || 
-         setBurgerPosition.y+setBurger.height/2+setBurger.height/5 < beforeBurgerPosition.y ||
+         setBurgerPosition.x+setBurger.width/2+setBurger.width < beforeBurgerPosition.x ||
+         (setBurgerPosition.y*1.7 < beforeBurgerPosition.y && !setBurger.classList.contains('upPan')) ||
+         (setBurgerPosition.y*1.8 < beforeBurgerPosition.y && setBurger.classList.contains('upPan')) ||
          setBurgerPosition.y+setBurger.height/5 > beforeBurgerPosition.y) {
           // ずれている場合
           alert('ミス……　乗せた具の枚数：'+cnt+'枚');
